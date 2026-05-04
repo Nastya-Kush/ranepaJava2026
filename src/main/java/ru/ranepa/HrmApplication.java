@@ -14,16 +14,15 @@ public class HrmApplication {
         addTestEmployees(repository);
         HRMService service = new HRMService(repository);
         Menu menu = new Menu(service);
-
         menu.start();
     }
 
     //предопределённые объекты
     private static void addTestEmployees(EmployeeRepository repository) {
-        repository.save(new Employee(null, "Kushnareva Anastasia", "Director",
+        repository.save(new Employee(null, "Кушнарева Анастасия", "Директор",
                 BigDecimal.valueOf(300000), LocalDate.of(2023, 6, 20)));
 
-        repository.save(new Employee(null, "Guretscaya Daria", "Business Analyst",
+        repository.save(new Employee(null, "Гуретская Дарья", "Визнес Аналитик",
                 BigDecimal.valueOf(120000), LocalDate.of(2024, 3, 6)));
     }
 }

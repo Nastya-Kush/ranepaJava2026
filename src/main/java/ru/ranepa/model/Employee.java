@@ -20,17 +20,17 @@ public class Employee {
     public Long getId() {return id;}
     public void setID(Long id) {this.id = id;}
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
 
-    public String getPosition() { return position; }
-    public void setPosition(String position) { this.position = position; }
+    public String getPosition() {return position;}
+    public void setPosition(String position) {this.position = position;}
 
-    public BigDecimal getSalary() { return salary; }
-    public void setSalary(BigDecimal salary) { this.salary = salary; }
+    public BigDecimal getSalary() {return salary;}
+    public void setSalary(BigDecimal salary) {this.salary = salary;}
 
-    public LocalDate getHireDate() { return hireDate; }
-    public void setHireDate(LocalDate hireDate) { this.hireDate = hireDate; }
+    public LocalDate getHireDate() {return hireDate;}
+    public void setHireDate(LocalDate hireDate) {this.hireDate = hireDate;}
 
     @Override
     public String toString() {

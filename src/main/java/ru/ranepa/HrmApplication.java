@@ -19,10 +19,10 @@ public class HrmApplication {
 
     //предопределённые объекты
     private static void addTestEmployees(EmployeeRepository repository) {
-        repository.save(new Employee(null, "Кушнарева Анастасия", "Директор",
+        repository.save(new Employee(null, "Кушнарева Анастасия Алексеевна", "Директор",
                 BigDecimal.valueOf(300000), LocalDate.of(2023, 6, 20)));
 
-        repository.save(new Employee(null, "Гуретская Дарья", "Визнес Аналитик",
+        repository.save(new Employee(null, "Гурецкая Дарья Денисовна", "Бизнес Аналитик",
                 BigDecimal.valueOf(120000), LocalDate.of(2024, 3, 6)));
     }
 }

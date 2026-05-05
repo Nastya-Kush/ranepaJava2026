@@ -25,9 +25,8 @@ public class Menu {
             System.setOut(new PrintStream(System.out, true, "UTF-8"));
             System.setErr(new PrintStream(System.err, true, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
-            // если вдруг не получилось — ничего страшного
+            // ничего не делаем
         }
-
         this.scanner = new Scanner(System.in, "UTF-8");
     }
 
@@ -67,20 +66,21 @@ public class Menu {
         System.out.println("0. Выход");
     }
 
+    // вывод всех сотрудников
     private void showAllEmployees() {
         List<Employee> employees = service.getAllEmployees();
         if (employees.isEmpty()) {
-            System.out.println("В системе не созданны сотрудники");
+            System.out.println("В системе не созданы сотрудники");
             return;
         }
 
-        System.out.printf("%-5s %-22s %-20s %-12s %-15s%n",
+        System.out.printf("%-5s %-35s %-20s %-12s %-15s%n",
                 "ID", "Name", "Position", "Salary", "Hire Date");
 
         for (Employee e : employees) {
-            System.out.printf("%-5d %-22s %-20s %-12.0f %-15s%n",
+            System.out.printf("%-5d %-35s %-20s %-12.0f %-15s%n",
                     e.getId(),
-                    truncateString(e.getName(), 22),
+                    truncateString(e.getName(), 35),
                     truncateString(e.getPosition(), 20),
                     e.getSalary(),
                     e.getHireDate().format(dateFormatter));
@@ -88,6 +88,7 @@ public class Menu {
         System.out.println("Всего сотруников: " + employees.size());
     }
 
+    // сортировка по дате
     private void showEmployeesSortedByDate() {
         List<Employee> employees = service.getAllEmployeesSortedByHireDate();
         if (employees.isEmpty()) {
@@ -95,13 +96,13 @@ public class Menu {
             return;
         }
 
-        System.out.printf("%-5s %-22s %-20s %-12s %-15s%n",
+        System.out.printf("%-5s %-35s %-20s %-12s %-15s%n",
                 "ID", "Name", "Position", "Salary", "Hire Date");
 
         for (Employee e : employees) {
-            System.out.printf("%-5d %-22s %-20s %-12.0f %-15s%n",
+            System.out.printf("%-5d %-35s %-20s %-12.0f %-15s%n",
                     e.getId(),
-                    truncateString(e.getName(), 22),
+                    truncateString(e.getName(), 35),
                     truncateString(e.getPosition(), 20),
                     e.getSalary(),
                     e.getHireDate().format(dateFormatter));
@@ -109,6 +110,7 @@ public class Menu {
         System.out.println("Всего сотруников: " + employees.size());
     }
 
+    // добавить сотрудника
     private void addEmployee() {
         String name = readStringInput("ФИО: ");
         String position = readStringInput("Должность: ");
@@ -121,6 +123,7 @@ public class Menu {
         System.out.printf("Сотрудник добавлен с ID: %d%n", saved.getId());
     }
 
+    // удалить сотудника
     private void deleteEmployee() {
         Long id = readLongInput("ID сотрудника для удаления: ");
 
@@ -131,6 +134,7 @@ public class Menu {
         }
     }
 
+    // найти сотрудника по id
     private void findEmployeeById() {
         Long id = readLongInput("ID сотрудник, которого необходимо найти: ");
 
@@ -143,6 +147,7 @@ public class Menu {
         }
     }
 
+    // статистика по компании
     private void showStatistics() {
         System.out.println("\nСводная статистика по компании");
         List<Employee> employees = service.getAllEmployees();
@@ -163,6 +168,7 @@ public class Menu {
         }
     }
 
+    // фильтр по должности
     private void filterByPosition() {
         String position = readStringInput("Введите должность для посика: ");
 
@@ -178,6 +184,7 @@ public class Menu {
         }
     }
 
+    // защита от ввода букв (основное меню)
     private int readIntInput(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -189,24 +196,26 @@ public class Menu {
         }
     }
 
+    // защита (поиск по id)
     private long readLongInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             try {
                 return Long.parseLong(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: введите действительный номер");
+                System.out.println("Ошибка: введите целое число");
             }
         }
     }
 
+    // неправильный ввод зп
     private double readDoubleInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             try {
                 return Double.parseDouble(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: введите действительное число (используйте точку в качестве разделителя).");
+                System.out.println("Ошибка: введите действительное число (используйте точку в качестве разделителя)");
             }
         }
     }
@@ -216,6 +225,7 @@ public class Menu {
         return scanner.nextLine().trim();
     }
 
+    // контроль ввода даты
     private LocalDate readDateInput(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -227,6 +237,7 @@ public class Menu {
         }
     }
 
+    // сокращение ФИО (список сотрудников)
     private String truncateString(String str, int maxLength) {
         if (str == null) return "";
         if (str.length() <= maxLength) return str;
